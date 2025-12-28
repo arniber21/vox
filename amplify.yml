@@ -7,7 +7,7 @@ frontend:
         - cd vox && pnpm install
     build:
       commands:
-        - cd vox && pnpm run build
+        - pnpm run build
   artifacts:
     baseDirectory: vox/.next
     files:
