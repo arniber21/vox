@@ -15,4 +15,4 @@ export const Container: React.FC<ContainerProps> = ({ className, children, ...pr
     </div>
 );
 
-export { Container };
+

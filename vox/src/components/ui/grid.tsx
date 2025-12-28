@@ -17,4 +17,4 @@ export const Grid: React.FC<GridProps> = ({ className, children, columns = 12, g
     );
 };
 
-export { Grid };
+
