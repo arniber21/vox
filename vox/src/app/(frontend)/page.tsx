@@ -3,7 +3,9 @@ import configPromise from '@payload-config'
 import { getPayload } from 'payload'
 import React from 'react'
 import { ArticleCard, type ArticleCardData } from '@/components/ArticleCard'
-import Link from 'next/link'
+import { Container } from '@/components/ui/container';
+import { Grid } from '@/components/ui/grid';
+import { Heading, Link, Paragraph, Link as TypographyLink } from '@/components/ui/typography';
 
 export default async function HomePage() {
     const payload = await getPayload({ config: configPromise })
