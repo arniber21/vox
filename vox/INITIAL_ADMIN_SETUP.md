@@ -35,3 +35,17 @@ After running the seed script (`/next/seed` in admin UI), you can log in with:
 4. Fill in the admin account details (make sure to set type to "admin")
 5. Set `ALLOW_INITIAL_ADMIN_CREATION=false` in `.env`
 6. Restart the application
+
+### Option 3: Production Seeding (Automated)
+To seed the production database with specific admin/developer accounts without wiping existing data:
+
+1. Configure the `SEED_*` environment variables in your `.env` (see `.env.example`).
+2. Run the production seed script:
+   ```bash
+   pnpm run seed:prod
+   ```
+   or if running on a server without pnpm:
+   ```bash
+   npm run seed:prod
+   ```
+3. This will create the users if they don't already exist.
