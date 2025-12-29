@@ -1,20 +1,20 @@
 version: 1
-frontend:
-  phases:
-    preBuild:
-      commands:
-        - npm install -g pnpm
-        - cd vox && pnpm install
-    build:
-      commands:
-        - pnpm run build
-        - rm -f node_modules/@swc/core-linux-x64-gnu/swc.linux-x64-gnu.node
-        - rm -f node_modules/@swc/core-linux-x64-musl/swc.linux-x64-musl.node
-  artifacts:
-    baseDirectory: vox/.next
-    files:
-      - '**/*'
-  cache:
-    paths:
-      - vox/node_modules/**/*
-      - vox/.next/cache/**/*
+applications:
+  - appRoot: vox
+    frontend:
+      phases:
+        preBuild:
+          commands:
+            - npm install -g pnpm
+            - pnpm install --frozen-lockfile
+        build:
+          commands:
+            - pnpm run build
+      artifacts:
+        baseDirectory: .next
+        files:
+          - '**/*'
+      cache:
+        paths:
+          - node_modules/**/*
+          - .next/cache/**/*
