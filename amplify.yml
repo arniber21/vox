@@ -9,12 +9,9 @@ frontend:
       commands:
         - pnpm run build
   artifacts:
-    baseDirectory: vox
+    baseDirectory: .next
     files:
-      - '.next/**/*'
-      - 'public/**/*'
-      - 'package.json'
-      - 'next.config.js'
+      - '**/*'
   cache:
     paths:
       - vox/node_modules/**/*
