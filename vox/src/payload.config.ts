@@ -77,6 +77,7 @@ export default buildConfig({
   db: postgresAdapter({
     pool: {
       connectionString: process.env.DATABASE_URI || '',
+      ssl: { rejectUnauthorized: false },
     },
   }),
   collections: [Pages, Users, Labs, Journals, Articles, Media],
