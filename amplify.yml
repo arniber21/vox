@@ -7,11 +7,14 @@ frontend:
         - cd vox && pnpm install
     build:
       commands:
-        - pnpm run build
+        - cd vox && pnpm run build
   artifacts:
-    baseDirectory: vox/.next
+    baseDirectory: vox
     files:
-      - '**/*'
+      - '.next/**/*'
+      - 'public/**/*'
+      - 'package.json'
+      - 'next.config.js'
   cache:
     paths:
       - vox/node_modules/**/*

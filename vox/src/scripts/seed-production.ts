@@ -4,7 +4,6 @@ import 'dotenv/config'
 
 const seedProduction = async () => {
   const payload = await getPayload({ config })
-
   const users = [
     {
       email: process.env.SEED_DEV_1_EMAIL || 'dev1@example.com',
