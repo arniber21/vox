@@ -7,13 +7,36 @@ applications:
           commands:
             - npm install -g pnpm
             - pnpm install --frozen-lockfile
+
         build:
           commands:
+            - rm -f .env.production
+            - touch .env.production
+
+            - echo "ALLOW_INITIAL_ADMIN_CREATION=${ALLOW_INITIAL_ADMIN_CREATION}" >> .env.production
+            - echo "DATABASE_URI=${DATABASE_URI}" >> .env.production
+            - echo "NEXT_PUBLIC_SERVER_URL=${NEXT_PUBLIC_SERVER_URL}" >> .env.production
+            - echo "PAYLOAD_SECRET=${PAYLOAD_SECRET}" >> .env.production
+
+            - echo "SMTP_FROM_ADDRESS=${SMTP_FROM_ADDRESS}" >> .env.production
+            - echo "SMTP_FROM_NAME=${SMTP_FROM_NAME}" >> .env.production
+            - echo "SMTP_HOST=${SMTP_HOST}" >> .env.production
+            - echo "SMTP_PASS=${SMTP_PASS}" >> .env.production
+            - echo "SMTP_USER=${SMTP_USER}" >> .env.production
+
+            - echo "S3_BUCKET=${S3_BUCKET}" >> .env.production
+            - echo "S3_REGION=${S3_REGION}" >> .env.production
+            - echo "S3_ACCESS_KEY_ID=${S3_ACCESS_KEY_ID}" >> .env.production
+            - echo "S3_SECRET_ACCESS_KEY=${S3_SECRET_ACCESS_KEY}" >> .env.production
+
+            # Build Next.js
             - pnpm run build
+
       artifacts:
         baseDirectory: .next
         files:
-          - '**/*'
+          - "**/*"
+
       cache:
         paths:
           - node_modules/**/*
