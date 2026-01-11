@@ -2,170 +2,63 @@ import type { Metadata } from 'next'
 import configPromise from '@payload-config'
 import { getPayload } from 'payload'
 import React from 'react'
-import { ArticleCard, type ArticleCardData } from '@/components/ArticleCard'
-import { Container } from '@/components/ui/container';
-import { Grid } from '@/components/ui/grid';
-import { Heading, Link, Paragraph, Link as TypographyLink } from '@/components/ui/typography';
+import { Container } from '@/components/ui/container'
+import { Link } from '@/components/ui/typography'
+import { WhoWeAreSection } from '@/components/sections/WhoWeAre'
+import { TimelineSection } from '@/components/sections/Timeline'
+import { JournalSection } from '@/components/sections/Journal'
+import { ContactSection } from '@/components/sections/Contact'
 
 export default async function HomePage() {
     const payload = await getPayload({ config: configPromise })
 
-    // Fetch recent articles
-    const articles = await payload.find({
-        collection: 'articles',
-        depth: 1,
-        limit: 6,
-        sort: '-publishedDate',
-        where: {
-            _status: {
-                equals: 'published',
-            },
-        },
-    })
-
-    // Fetch statistics
-    const [labsCount, peopleCount, articlesCount] = await Promise.all([
-        payload.count({ collection: 'labs' }),
-        payload.count({ collection: 'users' }),
-        payload.count({
-            collection: 'articles',
-            where: { _status: { equals: 'published' } },
-        }),
-    ])
-
     return (
-        <div>
+        <div className="bg-background min-h-screen">
             {/* Hero Section */}
-            <section className="bg-gradient-to-br from-primary/10 via-background to-background py-24 md:py-32">
-                <div className="container">
-                    <div className="max-w-4xl mx-auto text-center">
-                        <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent">
-                            VOX
+            <section className="relative bg-[#0A1A2F] text-white pt-24 pb-32 md:pt-32 md:pb-48 overflow-hidden">
+                 {/* Premium Background Effects */}
+                 <div className="absolute top-0 left-0 w-full h-full overflow-hidden z-0">
+                    <div className="absolute top-[-10%] right-[-5%] w-[500px] h-[500px] rounded-full bg-blue-600/20 blur-3xl" />
+                    <div className="absolute bottom-[-10%] left-[-10%] w-[600px] h-[600px] rounded-full bg-indigo-900/40 blur-3xl" />
+                 </div>
+
+                <div className="container relative z-10 text-center">
+                    <div className="max-w-5xl mx-auto">
+                        <h1 className="text-6xl md:text-8xl font-black mb-8 tracking-tighter leading-[0.9] bg-gradient-to-b from-white to-white/70 bg-clip-text text-transparent">
+                            VOX EQUITY
                         </h1>
-                        <p className="text-xl md:text-2xl text-foreground/80 mb-8">
-                            A Platform for Academic Excellence
+                        <p className="text-xl md:text-3xl font-light text-blue-100 mb-12 max-w-3xl mx-auto leading-relaxed">
+                            Empowering future leaders to advance health equity through research and insight
                         </p>
-                        <p className="text-lg text-muted-foreground mb-12 max-w-2xl mx-auto">
-                            Discover cutting-edge research, connect with leading researchers, and explore
-                            innovative labs pushing the boundaries of knowledge.
-                        </p>
-                        <div className="flex flex-wrap gap-4 justify-center">
+                        
+                        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
                             <Link
-                                href="/articles"
-                                className="px-6 py-3 bg-primary text-primary-foreground rounded-lg font-medium hover:bg-primary/90 transition-colors"
+                                href="/apply"
+                                className="px-8 py-4 bg-white text-[#0A1A2F] rounded-full font-bold text-lg hover:bg-blue-50 transition-all shadow-[0_0_20px_rgba(255,255,255,0.3)] hover:shadow-[0_0_30px_rgba(255,255,255,0.5)] transform hover:-translate-y-1"
                             >
-                                Browse Articles
+                                Apply Now
                             </Link>
                             <Link
-                                href="/labs"
-                                className="px-6 py-3 border border-border rounded-lg font-medium hover:bg-muted transition-colors"
+                                href="#who-we-are"
+                                className="px-8 py-4 border border-white/30 text-white rounded-full font-medium hover:bg-white/10 transition-colors backdrop-blur-sm"
                             >
-                                Explore Labs
+                                Learn More
                             </Link>
                         </div>
                     </div>
                 </div>
+                
+                {/* Decorative Bottom Curve can go here if desired, but clean cut is also modern */}
             </section>
 
-            {/* Statistics Section */}
-            <section className="py-16 border-y border-border">
-                <div className="container">
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-                        <div>
-                            <div className="text-4xl md:text-5xl font-bold text-primary mb-2">
-                                {articlesCount.totalDocs}
-                            </div>
-                            <div className="text-muted-foreground">Published Articles</div>
-                        </div>
-                        <div>
-                            <div className="text-4xl md:text-5xl font-bold text-primary mb-2">
-                                {labsCount.totalDocs}
-                            </div>
-                            <div className="text-muted-foreground">Research Labs</div>
-                        </div>
-                        <div>
-                            <div className="text-4xl md:text-5xl font-bold text-primary mb-2">
-                                {peopleCount.totalDocs}
-                            </div>
-                            <div className="text-muted-foreground">Researchers</div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            {/* Recent Articles Section */}
-            <section className="py-24">
-                <div className="container">
-                    <div className="flex justify-between items-end mb-12">
-                        <div>
-                            <h2 className="text-3xl md:text-4xl font-bold mb-4">Recent Articles</h2>
-                            <p className="text-muted-foreground">
-                                Explore the latest published research
-                            </p>
-                        </div>
-                        <Link
-                            href="/articles"
-                            className="text-primary hover:underline font-medium hidden md:block"
-                        >
-                            View all articles →
-                        </Link>
-                    </div>
-
-                    {articles.docs.length === 0 ? (
-                        <div className="text-center py-12 bg-muted rounded-lg">
-                            <p className="text-muted-foreground">No articles published yet.</p>
-                        </div>
-                    ) : (
-                        <>
-                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                                {articles.docs.map((article) => (
-                                    <ArticleCard key={article.id} article={article as ArticleCardData} />
-                                ))}
-                            </div>
-                            <div className="text-center mt-8 md:hidden">
-                                <Link
-                                    href="/articles"
-                                    className="text-primary hover:underline font-medium"
-                                >
-                                    View all articles →
-                                </Link>
-                            </div>
-                        </>
-                    )}
-                </div>
-            </section>
-
-            {/* CTA Section */}
-            <section className="py-24 bg-muted">
-                <div className="container">
-                    <div className="max-w-3xl mx-auto text-center">
-                        <h2 className="text-3xl md:text-4xl font-bold mb-6">
-                            Join Our Research Community
-                        </h2>
-                        <p className="text-lg text-muted-foreground mb-8">
-                            Connect with researchers, explore innovative labs, and contribute to the
-                            advancement of knowledge.
-                        </p>
-                        <div className="flex flex-wrap gap-4 justify-center">
-                            <Link
-                                href="/people"
-                                className="px-6 py-3 bg-primary text-primary-foreground rounded-lg font-medium hover:bg-primary/90 transition-colors"
-                            >
-                                Meet Our Researchers
-                            </Link>
-                            <Link
-                                href="/journals"
-                                className="px-6 py-3 border border-border bg-background rounded-lg font-medium hover:bg-muted transition-colors"
-                            >
-                                View Journals
-                            </Link>
-                        </div>
-                    </div>
-                </div>
-            </section>
+            <WhoWeAreSection />
+            <TimelineSection />
+            <JournalSection />
+            <ContactSection />
         </div>
     )
 }
+
 
 export const metadata: Metadata = {
     title: 'VOX | Academic Research Platform',

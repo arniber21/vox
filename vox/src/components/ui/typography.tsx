@@ -10,12 +10,12 @@ export const Heading: React.FC<HeadingProps> = ({ level, className, children, ..
     const Tag = (`h${level}`) as React.ElementType;
     const baseClasses = 'font-heading scroll-m-20';
     const sizeClasses = {
-        1: 'text-4xl lg:text-5xl font-bold',
-        2: 'text-3xl lg:text-4xl font-semibold',
-        3: 'text-2xl lg:text-3xl font-medium',
-        4: 'text-xl lg:text-2xl font-medium',
-        5: 'text-lg lg:text-xl font-medium',
-        6: 'text-base lg:text-lg font-medium',
+        1: 'text-4xl lg:text-5xl',
+        2: 'text-3xl lg:text-4xl',
+        3: 'text-2xl lg:text-3xl',
+        4: 'text-xl lg:text-2xl',
+        5: 'text-lg lg:text-xl',
+        6: 'text-base lg:text-lg',
     }[level];
     return React.createElement(
         Tag,
