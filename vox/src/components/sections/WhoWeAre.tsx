@@ -42,7 +42,7 @@ export const WhoWeAreSection: React.FC = () => {
 
           <div className="pt-8 border-t border-white/10 text-center">
             <p className="text-2xl md:text-3xl font-light italic text-blue-200 mb-8">
-              Whether you're curious, committed, or just getting started — there's a place for
+              Whether you&apos;re curious, committed, or just getting started — there&apos;s a place for
               you here.
             </p>
             
