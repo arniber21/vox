@@ -17,7 +17,7 @@ export const HeaderNav: React.FC<{ data: { navItems: any[] } }> = ({ data }) => 
         if (children && children.length > 0) {
           return (
             <div key={i} className="relative group">
-              <button className="flex items-center gap-1 text-sm font-medium hover:text-primary transition-colors py-2">
+              <button className="flex items-center gap-1 text-sm font-medium text-[#0A2D66] hover:text-primary transition-colors py-2">
                 {link.label}
                 <svg
                   width="12"
@@ -50,7 +50,7 @@ export const HeaderNav: React.FC<{ data: { navItems: any[] } }> = ({ data }) => 
             </div>
           )
         }
-        return <CMSLink key={i} {...link} appearance="link" className="text-sm font-medium hover:text-primary transition-colors" />
+        return <CMSLink key={i} {...link} appearance="link" className="text-sm font-medium text-[#0A2D66] hover:text-primary transition-colors" />
       })}
       
     </nav>

@@ -23,7 +23,7 @@ export const Logo = (props: Props) => {
       fetchPriority={priority}
       decoding="async"
       className={clsx('max-w-[9.375rem] w-full h-[34px] object-contain', className)}
-      src="/media/logo-dark.png"
+      src="/media/vox_equity_logo_2.png"
     />
   )
 }

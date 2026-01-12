@@ -39,6 +39,8 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
   const { headerTheme, setHeaderTheme } = useHeaderTheme()
   const pathname = usePathname()
 
+  const isHome = pathname === '/'
+
   useEffect(() => {
     setHeaderTheme(null)
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -52,26 +54,37 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
   return (
     <>
       {/* Top Banner */}
-      <div className="bg-background border-b border-border py-2 text-center text-sm">
-        <span className="italic font-medium text-[#1e3a8a] dark:text-blue-400">
+      <div className={isHome ? 'bg-transparent py-2 text-center text-sm text-white' : 'bg-background border-b border-border py-2 text-center text-sm'}>
+        <span className={isHome ? 'italic font-medium text-white' : 'italic font-medium text-[#1e3a8a] dark:text-blue-400'}>
            Now Accepting Applications for Spring 2026!{' '}
         </span>
-        <Link href="/apply" className="font-semibold underline hover:text-primary ml-1 text-[#1e3a8a] dark:text-blue-400">
+        <Link href="/apply" className={isHome ? 'font-semibold underline ml-1 text-white' : 'font-semibold underline hover:text-primary ml-1 text-[#1e3a8a] dark:text-blue-400'}>
           VOX Equity Application.
         </Link>
-        <span className="ml-4 text-muted-foreground text-xs">
+        <span className={isHome ? 'ml-4 text-white text-xs' : 'ml-4 text-muted-foreground text-xs'}>
           Deadline: January 16th, 2026
         </span>
       </div>
 
-      <header className="container relative z-20" {...(theme ? { 'data-theme': theme } : {})}>
-        <div className="py-6 flex justify-between items-center">
-          <Link href="/">
-            <Logo loading="eager" priority="high" className="invert dark:invert-0 w-32" />
-          </Link>
-          <HeaderNav data={headerData as any} />
-        </div>
-      </header>
+      {isHome ? (
+        <header {...(theme ? { 'data-theme': theme } : {})} className="absolute inset-x-0 top-8 z-20">
+          <div className="container py-6 flex justify-between items-center">
+            <Link href="/">
+              <Logo loading="eager" priority="high" className="invert dark:invert-0 w-44 h-auto max-w-none" />
+            </Link>
+            <HeaderNav data={headerData as any} />
+          </div>
+        </header>
+      ) : (
+        <header className="container relative z-20" {...(theme ? { 'data-theme': theme } : {})}>
+          <div className="py-6 flex justify-between items-center">
+            <Link href="/">
+              <Logo loading="eager" priority="high" className="invert dark:invert-0 w-44 h-auto max-w-none" />
+            </Link>
+            <HeaderNav data={headerData as any} />
+          </div>
+        </header>
+      )}
     </>
   )
 }
