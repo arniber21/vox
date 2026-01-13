@@ -70,7 +70,7 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
         <header {...(theme ? { 'data-theme': theme } : {})} className="absolute inset-x-0 top-8 z-20">
           <div className="container py-6 flex justify-between items-center">
             <Link href="/">
-              <Logo loading="eager" priority="high" className="invert dark:invert-0 w-32 h-auto max-w-none" />
+              <Logo loading="eager" priority="high" className="invert dark:invert-0 w-28 max-w-none" />
             </Link>
             <HeaderNav data={headerData as any} />
           </div>
@@ -79,7 +79,7 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
         <header className="container relative z-20" {...(theme ? { 'data-theme': theme } : {})}>
           <div className="py-6 flex justify-between items-center">
             <Link href="/">
-              <Logo loading="eager" priority="high" className="invert dark:invert-0 w-32 h-auto max-w-none" />
+              <Logo loading="eager" priority="high" className="invert dark:invert-0 w-28 max-w-none" />
             </Link>
             <HeaderNav data={headerData as any} />
           </div>
